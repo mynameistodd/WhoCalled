@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.mynameistodd.whocalled" android:versionCode="7"
+	android:versionName="1.07">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="8"></uses-sdk>
+	<application android:icon="@drawable/icon" android:label="@string/app_name">
+		<receiver android:name="whocalledReceiver"
+			android:permission="android.permission.READ_PHONE_STATE">
+			<intent-filter>
+				<action android:name="android.intent.action.PHONE_STATE"></action>
+			</intent-filter>
+		</receiver>
+		<activity android:name="WhoCalled">
+		</activity>
+		<activity android:name="SubmitResponse">
+		</activity>
+		<activity android:name="MissedCallsList">
+		</activity>
+		<activity android:name="WhoCalledTabWidget">
+			<intent-filter>
+				<category android:name="android.intent.category.LAUNCHER"></category>
+				<action android:name="android.intent.action.MAIN"></action>
+			</intent-filter>
+		</activity>
+		<activity android:name="com.google.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation">
+		</activity>
+	</application>
+</manifest>

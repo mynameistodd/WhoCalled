@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">Who Called</string>
+
+	<string name="submit_your_response">Submit Your Response</string>
+	<color name="white">#FFF</color>
+	<color name="black">#000</color>
+	<string name="submit">Submit</string>
+	<string name="your_response">Who Called?</string>
+	<string name="most_popular_response">Most Popular Response For:</string>
+	<string name="unknown_caller">Unknown Caller</string>
+	<string name="reported_name">Reported Name</string>
+	<string name="caller_id">CallerID (if any):</string>
+</resources>
