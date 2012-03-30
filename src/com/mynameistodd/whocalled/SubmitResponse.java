@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class SubmitResponse extends Activity {
 
@@ -32,6 +33,7 @@ public class SubmitResponse extends Activity {
 	private Button submitButton;
 	private EditText whoCalledInput;
 	private EditText callerIDInput;
+	private TextView who_called_from;
 	String baseURL = "http://whocalled.us/do?action=report&name=test&pass=test&phoneNumber=";
 	String result;
 	AdView adView;
@@ -47,9 +49,11 @@ public class SubmitResponse extends Activity {
 		submitButton = (Button)findViewById(R.id.button1);
 		whoCalledInput = (EditText)findViewById(R.id.whoCalledInput);
 		callerIDInput = (EditText)findViewById(R.id.callerIDInput);
-		
+		who_called_from = (TextView)findViewById(R.id.textView1);
 		adView = (AdView)findViewById(R.id.adView);
 	    
+		who_called_from.append(" " + number + "?");
+		
 	    AdRequest adRequest = new AdRequest();
 	    //adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
 	    //adRequest.addTestDevice("20758E6052B8B6F7C4F6A3392B9B15E3");

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/adView"
-        android:text="@string/your_response"
+        android:text="@string/who_called_from"
         android:textAppearance="?android:attr/textAppearanceLarge" >
     </TextView>
 

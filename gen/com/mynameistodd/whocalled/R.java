@@ -53,6 +53,6 @@ public final class R {
         public static final int submit=0x7f040002;
         public static final int submit_your_response=0x7f040001;
         public static final int unknown_caller=0x7f040005;
-        public static final int your_response=0x7f040003;
+        public static final int who_called_from=0x7f040003;
     }
 }

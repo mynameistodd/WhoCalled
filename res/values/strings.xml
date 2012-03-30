@@ -7,7 +7,7 @@
 	<color name="white">#FFF</color>
 	<color name="black">#000</color>
 	<string name="submit">Submit</string>
-	<string name="your_response">Who Called?</string>
+	<string name="who_called_from">Who called from</string>
 	<string name="most_popular_response">Most Popular Response For:</string>
 	<string name="unknown_caller">Unknown Caller</string>
 	<string name="reported_name">Reported Name</string>
