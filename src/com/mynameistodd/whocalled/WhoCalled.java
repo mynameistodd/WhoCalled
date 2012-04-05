@@ -14,6 +14,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.util.Log;
@@ -80,6 +81,11 @@ public class WhoCalled extends Activity {
         callerName.setText(who);
         callerNumber.setText(phoneNumber);
         
+        if (who != "Unknown Caller")
+        {
+        	saveToCache(phoneNumber, who);
+        }
+        
         reportButton = (Button)findViewById(R.id.button1);
         reportButton.setOnClickListener(new OnClickListener() {
 		
@@ -127,6 +133,14 @@ public class WhoCalled extends Activity {
         }  
         httpclient.getConnectionManager().shutdown();
     }
+    
+    public void saveToCache(String number, String name)
+	{
+		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
+	    SharedPreferences.Editor editor = settings.edit();
+	    editor.putString(number, name);
+	    editor.commit();
+	}
     
     @Override
     protected void onStop() {
