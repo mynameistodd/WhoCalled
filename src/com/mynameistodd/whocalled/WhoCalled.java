@@ -14,7 +14,6 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.util.Log;
@@ -36,6 +35,7 @@ public class WhoCalled extends Activity {
 	Intent callingIntent;
 	Context curContext;
 	GoogleAnalyticsTracker tracker;
+	private Util whoCalledUtil;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class WhoCalled extends Activity {
         setContentView(R.layout.main);
         callingIntent = getIntent();
         curContext = getApplicationContext();
+        whoCalledUtil = new Util(curContext);
         tracker = GoogleAnalyticsTracker.getInstance();
         tracker.startNewSession("UA-26489424-1", this);
         
@@ -77,13 +78,13 @@ public class WhoCalled extends Activity {
 	        	who = whoKeyVal[1];
 	        }
 
-        }    
+        }
         callerName.setText(who);
         callerNumber.setText(phoneNumber);
         
         if (who != "Unknown Caller")
         {
-        	saveToCache(phoneNumber, who);
+        	whoCalledUtil.saveToCache(phoneNumber, who);
         }
         
         reportButton = (Button)findViewById(R.id.button1);
@@ -134,13 +135,13 @@ public class WhoCalled extends Activity {
         httpclient.getConnectionManager().shutdown();
     }
     
-    public void saveToCache(String number, String name)
-	{
-		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
-	    SharedPreferences.Editor editor = settings.edit();
-	    editor.putString(number, name);
-	    editor.commit();
-	}
+//    public void saveToCache(String number, String name)
+//	{
+//		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
+//	    SharedPreferences.Editor editor = settings.edit();
+//	    editor.putString(number, name);
+//	    editor.commit();
+//	}
     
     @Override
     protected void onStop() {

@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.PhoneLookup;
@@ -18,11 +17,13 @@ import android.util.Log;
 public class whocalledReceiver extends BroadcastReceiver {
 	Context curContext;
 	PhoneStateListener listener;
+	private Util whoCalledUtil;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		TelephonyManager telMan = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		curContext = context;
+		whoCalledUtil = new Util(curContext);
 		
         listener = new PhoneStateListener() {
         	public void onCallStateChanged(int state, String incomingNumber) {
@@ -43,7 +44,7 @@ public class whocalledReceiver extends BroadcastReceiver {
 			        		{
 			        			int icon = R.drawable.icon;
 			        			long when = System.currentTimeMillis();
-			        			String displayName = readFromCache(incomingNumber);
+			        			String displayName = whoCalledUtil.readFromCache(incomingNumber);
 			        			
 			        			CharSequence tickerText = displayName + " - " + incomingNumber;
 			        			CharSequence contentTitle = displayName + " - " + incomingNumber;
@@ -75,9 +76,9 @@ public class whocalledReceiver extends BroadcastReceiver {
 	}
 	
 	
-	public String readFromCache(String number)
-	{
-		SharedPreferences settings = curContext.getSharedPreferences(MissedCallsList.PREFERENCES_NAME, Context.MODE_PRIVATE);
-	    return settings.getString(number, "Unknown Caller");
-	}
+//	public String readFromCache(String number)
+//	{
+//		SharedPreferences settings = curContext.getSharedPreferences(MissedCallsList.PREFERENCES_NAME, Context.MODE_PRIVATE);
+//	    return settings.getString(number, "Unknown Caller");
+//	}
 }

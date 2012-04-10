@@ -16,7 +16,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +45,7 @@ public class MissedCallsList extends ListActivity {
 	ProgressDialog progressDialog;
 	String FILENAME = "names_numbers";
 	public static String PREFERENCES_NAME = "WhoCalled";
+	private Util whoCalledUtil;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class MissedCallsList extends ListActivity {
 		setContentView(R.layout.list_view);
 		
 		curContext = this;
+		whoCalledUtil = new Util(curContext);
+		
 		tracker = GoogleAnalyticsTracker.getInstance();
 		tracker.startNewSession("UA-26489424-1", this);
 		
@@ -91,7 +93,7 @@ public class MissedCallsList extends ListActivity {
 				}
 				else if (v.getId() == R.id.displayName)
 				{
-					String fromCache = readFromCache(text);
+					String fromCache = whoCalledUtil.readFromCache(text);
 					v.setText(fromCache);
 				}
 				else
@@ -208,7 +210,7 @@ public class MissedCallsList extends ListActivity {
 	        }
 	        if (who != "Unknown Caller")
 	        {
-	        	saveToCache(number, who);
+	        	whoCalledUtil.saveToCache(number, who);
 	        }
         }
         
@@ -231,19 +233,19 @@ public class MissedCallsList extends ListActivity {
 		dialog.show();
 	}
 	
-	public void saveToCache(String number, String name)
-	{
-		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
-	    SharedPreferences.Editor editor = settings.edit();
-	    editor.putString(number, name);
-	    editor.commit();
-	}
-	
-	public String readFromCache(String number)
-	{
-		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
-	    return settings.getString(number, "Unknown Caller");
-	}
+//	public void saveToCache(String number, String name)
+//	{
+//		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+//	    SharedPreferences.Editor editor = settings.edit();
+//	    editor.putString(number, name);
+//	    editor.commit();
+//	}
+//	
+//	public String readFromCache(String number)
+//	{
+//		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+//	    return settings.getString(number, "Unknown Caller");
+//	}
 
 	@Override
 	protected void onStop() {

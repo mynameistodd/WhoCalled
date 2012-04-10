@@ -17,7 +17,6 @@ import com.google.ads.AdView;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +36,7 @@ public class SubmitResponse extends Activity {
 	String baseURL = "http://whocalled.us/do?action=report&name=test&pass=test&phoneNumber=";
 	String result;
 	AdView adView;
+	private Util whoCalledUtil;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class SubmitResponse extends Activity {
 		setContentView(R.layout.submit_response);
 		
 		callingIntent = getIntent();
+		whoCalledUtil = new Util(this);
 		
 		number = callingIntent.getStringExtra("com.mynameistodd.whocalled.unknownNumber");
 		submitButton = (Button)findViewById(R.id.button1);
@@ -135,18 +136,18 @@ public class SubmitResponse extends Activity {
         }  
         httpclient.getConnectionManager().shutdown();
         
-        saveToCache(number, whoCalled);
+        whoCalledUtil.saveToCache(number, whoCalled);
         
         return result;
     }
 	
-	public void saveToCache(String number, String name)
-	{
-		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
-	    SharedPreferences.Editor editor = settings.edit();
-	    editor.putString(number, name);
-	    editor.commit();
-	}
+//	public void saveToCache(String number, String name)
+//	{
+//		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
+//	    SharedPreferences.Editor editor = settings.edit();
+//	    editor.putString(number, name);
+//	    editor.commit();
+//	}
 	
 	@Override
 	protected void onDestroy() {
