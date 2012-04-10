@@ -135,14 +135,6 @@ public class WhoCalled extends Activity {
         httpclient.getConnectionManager().shutdown();
     }
     
-//    public void saveToCache(String number, String name)
-//	{
-//		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
-//	    SharedPreferences.Editor editor = settings.edit();
-//	    editor.putString(number, name);
-//	    editor.commit();
-//	}
-    
     @Override
     protected void onStop() {
         super.onStop();

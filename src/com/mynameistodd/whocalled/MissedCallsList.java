@@ -232,20 +232,6 @@ public class MissedCallsList extends ListActivity {
 		
 		dialog.show();
 	}
-	
-//	public void saveToCache(String number, String name)
-//	{
-//		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
-//	    SharedPreferences.Editor editor = settings.edit();
-//	    editor.putString(number, name);
-//	    editor.commit();
-//	}
-//	
-//	public String readFromCache(String number)
-//	{
-//		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
-//	    return settings.getString(number, "Unknown Caller");
-//	}
 
 	@Override
 	protected void onStop() {

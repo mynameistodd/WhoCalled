@@ -74,11 +74,4 @@ public class whocalledReceiver extends BroadcastReceiver {
 	        
         telMan.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
 	}
-	
-	
-//	public String readFromCache(String number)
-//	{
-//		SharedPreferences settings = curContext.getSharedPreferences(MissedCallsList.PREFERENCES_NAME, Context.MODE_PRIVATE);
-//	    return settings.getString(number, "Unknown Caller");
-//	}
 }

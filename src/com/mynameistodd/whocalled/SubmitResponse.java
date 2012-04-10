@@ -141,14 +141,6 @@ public class SubmitResponse extends Activity {
         return result;
     }
 	
-//	public void saveToCache(String number, String name)
-//	{
-//		SharedPreferences settings = getSharedPreferences(MissedCallsList.PREFERENCES_NAME, MODE_PRIVATE);
-//	    SharedPreferences.Editor editor = settings.edit();
-//	    editor.putString(number, name);
-//	    editor.commit();
-//	}
-	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
