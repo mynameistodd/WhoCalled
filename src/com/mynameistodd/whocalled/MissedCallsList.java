@@ -1,13 +1,5 @@
 package com.mynameistodd.whocalled;
 
-import java.io.IOException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import android.app.AlertDialog;
@@ -40,11 +32,8 @@ public class MissedCallsList extends ListActivity {
 	private Context curContext;
 	public String number;
 	String result = "";
-	String baseURL = "http://whocalled.us/do?action=getWho&name=test&pass=test&phoneNumber=";
 	GoogleAnalyticsTracker tracker;
 	ProgressDialog progressDialog;
-	String FILENAME = "names_numbers";
-	public static String PREFERENCES_NAME = "WhoCalled";
 	private Util whoCalledUtil;
 	
 	@Override
@@ -126,8 +115,8 @@ public class MissedCallsList extends ListActivity {
         Thread myThread = new Thread(new Runnable() {
             public void run() {
             	Looper.prepare();
-				getWhoCalledResponse();
-				processResultAndShowDialog();
+				result = whoCalledUtil.getWhoCalledResponse(number);
+				showDialog(result);
                 progressDialog.dismiss();
                 Looper.loop();	
             }
@@ -175,45 +164,9 @@ public class MissedCallsList extends ListActivity {
 			tracker.trackPageView("/callList/error/"+number);
 		}
 	}
-
-	public void getWhoCalledResponse(){  
-        HttpClient httpclient = new DefaultHttpClient();  
-        HttpGet request = new HttpGet(baseURL + number);
-        Log.d("mynameistodd", "request: " + baseURL + number);
-        ResponseHandler<String> handler = new BasicResponseHandler();  
-        try {  
-            result = httpclient.execute(request, handler);  
-            Log.d("mynameistodd", "result: " + result);
-        } catch (ClientProtocolException e) {  
-            e.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-        httpclient.getConnectionManager().shutdown();
-    }
 	
-	public void processResultAndShowDialog()
-	{
-		String[] splitQueryString = new String[0];
-        String[] whoKeyVal = new String[0];
-        String who = "Unknown Caller";
-        if (result.length() > 0)
-        {
-	        splitQueryString = result.split("&");
-	        if (splitQueryString.length > 1)
-	        {
-	        	whoKeyVal = splitQueryString[1].split("=");
-	        }
-	        if (whoKeyVal.length > 1)
-	        {
-	        	who = whoKeyVal[1];
-	        }
-	        if (who != "Unknown Caller")
-	        {
-	        	whoCalledUtil.saveToCache(number, who);
-	        }
-        }
-        
+	public void showDialog(String who)
+	{        
         tracker.trackPageView("/callList/click/"+number);
 
 		AlertDialog.Builder dialog = new AlertDialog.Builder(curContext);
