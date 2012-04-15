@@ -136,7 +136,7 @@ public class MissedCallsList extends ListActivity {
 	public boolean onContextItemSelected(MenuItem item) {
 	  //AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 	  switch (item.getItemId()) {
-	  case R.id.item1:
+	  case R.id.call_menu_item:
 		  Uri telNum = Uri.parse("tel:" + number);
 		  startActivity(new Intent(Intent.ACTION_DIAL, telNum));
 	    return true;

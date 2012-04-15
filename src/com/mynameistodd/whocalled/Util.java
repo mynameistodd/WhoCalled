@@ -15,7 +15,7 @@ import android.util.Log;
 
 public class Util {
 	Context curContext;
-	String PREFERENCES_NAME = "WhoCalled";
+	static String PREFERENCES_NAME = "WhoCalled";
 	String baseURL = "http://whocalled.us/do?action=getWho&name=test&pass=test&phoneNumber=";
 	
 	public Util(Context curContext) {
