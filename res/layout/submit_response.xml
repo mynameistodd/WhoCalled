@@ -54,12 +54,22 @@
         android:ems="10"
         android:inputType="text" />
 
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/callerIDInput"
+        android:checked="true"
+        android:text="@string/post_to_facebook" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/callerIDInput"
-        android:layout_marginTop="42dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/checkBox1"
+        android:layout_marginTop="22dp"
         android:text="@string/submit" />
 
 </RelativeLayout>

@@ -12,4 +12,5 @@
 	<string name="unknown_caller">Unknown Caller</string>
 	<string name="reported_name">Reported Name</string>
 	<string name="caller_id">CallerID (if any):</string>
+	<string name="post_to_facebook">Post to Facebook</string>
 </resources>

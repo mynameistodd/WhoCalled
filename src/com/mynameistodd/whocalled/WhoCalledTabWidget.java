@@ -107,16 +107,19 @@ public class WhoCalledTabWidget extends TabActivity {
 						@Override
 						public void onFacebookError(FacebookError error) {
 							Log.d("mynameistodd", "inside onFacebookError");
+							Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
 						}
 
 						@Override
 						public void onError(DialogError e) {
 							Log.d("mynameistodd", "inside onError");
+							Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 						}
 
 						@Override
 						public void onCancel() {
 							Log.d("mynameistodd", "inside onCancel");
+							Toast.makeText(getApplicationContext(), "I'm sad...authorization aborted!", Toast.LENGTH_LONG).show();
 						}
 					});
 				}

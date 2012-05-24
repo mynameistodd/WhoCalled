@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class SubmitResponse extends Activity {
 	private EditText whoCalledInput;
 	private EditText callerIDInput;
 	private TextView who_called_from;
+	private CheckBox checkBox1;
 	String baseURL = "http://whocalled.us/do?action=report&name=test&pass=test&phoneNumber=";
 	String baseMyURL = "http://strong-robot-8518.herokuapp.com/";
 	String baseMyURLJson = baseMyURL + "answers.json";
@@ -73,6 +75,7 @@ public class SubmitResponse extends Activity {
 		callerIDInput = (EditText)findViewById(R.id.callerIDInput);
 		who_called_from = (TextView)findViewById(R.id.textView1);
 		adView = (AdView)findViewById(R.id.adView);
+		checkBox1 = (CheckBox)findViewById(R.id.checkBox1);
 	    
 		who_called_from.append(" " + number + "?");
 		
@@ -183,6 +186,7 @@ public class SubmitResponse extends Activity {
         httpclient.getConnectionManager().shutdown();
         return resultWCUS;
 	}
+	
 	public String postWhoCalledHeroku(String encodedWhoCalled, String encodedCallerID)
 	{
 		HttpClient httpclient = new DefaultHttpClient();
@@ -223,10 +227,13 @@ public class SubmitResponse extends Activity {
         httpclient.getConnectionManager().shutdown();
         return resultWCH;
 	}
+	
 	public void postFacebook(String herokuResponse)
 	{
 		Log.d("mynameistodd", "Facebook isSessionValid: " + String.valueOf(facebook.isSessionValid()));
-        if (facebook.isSessionValid()) {
+		boolean postToFacebook = checkBox1.isChecked();
+		
+        if (facebook.isSessionValid() && postToFacebook) {
         	
         	String responseID = "";
         	try {
