@@ -79,6 +79,10 @@ public class WhoCalled extends Activity {
 			Toast.makeText(curContext, "Submitted!", Toast.LENGTH_SHORT).show();
 			tracker.trackPageView("/whoCalled/submited/"+phoneNumber);
 		}
+		else if (resultCode == RESULT_CANCELED)
+		{
+			
+		}
 		else
 		{
 			String response = "Error: ";

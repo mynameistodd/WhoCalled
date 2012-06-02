@@ -13,4 +13,5 @@
 	<string name="reported_name">Reported Name</string>
 	<string name="caller_id">CallerID (if any):</string>
 	<string name="post_to_facebook">Post to Facebook</string>
+	<string name="btn_about_ok">OK</string>
 </resources>

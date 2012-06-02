@@ -153,6 +153,10 @@ public class MissedCallsList extends ListActivity {
 			Toast.makeText(curContext, "Submitted!", Toast.LENGTH_SHORT).show();
 			tracker.trackPageView("/callList/submited/"+number);
 		}
+		else if (resultCode == RESULT_CANCELED)
+		{
+			
+		}
 		else
 		{
 			String response = "Error: ";

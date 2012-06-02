@@ -13,10 +13,13 @@ import com.facebook.android.FacebookError;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -50,19 +53,19 @@ public class WhoCalledTabWidget extends TabActivity {
 	    //missed calls
 	    intent = new Intent().setClass(this, MissedCallsList.class);
 	    intent.putExtra("com.mynameistodd.whocalled.calllist", 1);
-	    spec = tabHost.newTabSpec("missed").setIndicator("Missed").setContent(intent);
+	    spec = tabHost.newTabSpec("missed").setIndicator("Missed", getResources().getDrawable(android.R.drawable.sym_call_missed)).setContent(intent);
 	    tabHost.addTab(spec);
 	    
 	    //outgoing calls
 	    intent = new Intent().setClass(this, MissedCallsList.class);
 	    intent.putExtra("com.mynameistodd.whocalled.calllist", 2);
-	    spec = tabHost.newTabSpec("outgoing").setIndicator("Outgoing").setContent(intent);
+	    spec = tabHost.newTabSpec("outgoing").setIndicator("Outgoing", getResources().getDrawable(android.R.drawable.sym_call_outgoing)).setContent(intent);
 	    tabHost.addTab(spec);
 	    
 	    //incoming calls
 	    intent = new Intent().setClass(this, MissedCallsList.class);
 	    intent.putExtra("com.mynameistodd.whocalled.calllist", 3);
-	    spec = tabHost.newTabSpec("incoming").setIndicator("Incoming").setContent(intent);
+	    spec = tabHost.newTabSpec("incoming").setIndicator("Incoming", getResources().getDrawable(android.R.drawable.sym_call_incoming)).setContent(intent);
 	    tabHost.addTab(spec);
 	    
 	    tabHost.setCurrentTab(0);
@@ -119,9 +122,13 @@ public class WhoCalledTabWidget extends TabActivity {
 						@Override
 						public void onCancel() {
 							Log.d("mynameistodd", "inside onCancel");
-							Toast.makeText(getApplicationContext(), "I'm sad...authorization aborted!", Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), "You canceled? How sad...", Toast.LENGTH_LONG).show();
 						}
 					});
+				}
+				else
+				{
+					Toast.makeText(getApplicationContext(), "Already authorized!", Toast.LENGTH_SHORT).show();
 				}
 				return true;
 			case R.id.logout_fb_item:
@@ -156,6 +163,9 @@ public class WhoCalledTabWidget extends TabActivity {
 					  }
 					});
 				Toast.makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.about_item:
+				startActivity(new Intent(this, About.class));
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);		

@@ -39,6 +39,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SubmitResponse extends Activity {
 
@@ -138,6 +139,10 @@ public class SubmitResponse extends Activity {
         }
         if(expires != 0) {
             facebook.setAccessExpires(expires);
+        }
+        if (!facebook.isSessionValid()) {
+        	checkBox1.setEnabled(false);
+        	checkBox1.setChecked(false);
         }
 	}
 
@@ -272,6 +277,7 @@ public class SubmitResponse extends Activity {
 				@Override
 				public void onComplete(String response, Object state) {
 					Log.d("mynameistodd", response);
+					Toast.makeText(getApplicationContext(), "Woot, posted!", Toast.LENGTH_SHORT).show();
 				}
 			}, null);
         }

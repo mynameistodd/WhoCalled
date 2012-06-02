@@ -28,5 +28,6 @@
 		</activity>
 		<activity android:name="com.google.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation">
 		</activity>
+		<activity android:theme="@android:style/Theme.Dialog" android:name="About" android:label="About"></activity>
 	</application>
 </manifest>
